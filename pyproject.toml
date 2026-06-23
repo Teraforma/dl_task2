@@ -10,10 +10,11 @@ dependencies = [
     "numpy>=2.4.6",
     "optuna>=4.9.0",
     "scikit-learn>=1.9.0",
-    "torch>=2.12.0",
-    "torchvision>=0.27.0",
 
-    # ROCm-only packages    
+
+    # ROCm-only packages
+    "torch==2.9.1",
+    "torchvision==0.24.1",
     "pytorch-triton-rocm>=3.5.1 ; sys_platform == 'linux'",
     "triton-rocm>=3.6.0 ; sys_platform == 'linux'",
 ]
@@ -21,9 +22,11 @@ dependencies = [
 
 [tool.uv.sources]
 torch = [
+  { index = "pytorch-cpu", marker = "sys_platform != 'linux'" },
   { index = "pytorch-rocm", marker = "sys_platform == 'linux'" },
 ]
 torchvision = [
+  { index = "pytorch-cpu", marker = "sys_platform != 'linux'" },
   { index = "pytorch-rocm", marker = "sys_platform == 'linux'" },
 ]
 
@@ -46,5 +49,5 @@ explicit = true
 
 [[tool.uv.index]]
 name = "pytorch-rocm"
-url = "https://download.pytorch.org/whl/rocm7.2"
+url = "https://download.pytorch.org/whl/rocm6.4"
 explicit = true
